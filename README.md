@@ -18,7 +18,7 @@ pak::pak("drieslab/GiottoDB")
 ```
 
 ## GiottoDB Functionality
-- [x] [GiottoClas::createExprObj()](https://drieslab.github.io/GiottoClass/reference/createExprObj.html)
+- [x] [GiottoClass::createExprObj()](https://drieslab.github.io/GiottoClass/reference/createExprObj.html)
 - [ ] [GiottoClass::createGiottoPoints()](https://drieslab.github.io/GiottoClass/reference/createGiottoPoints.html)
 - [ ] [GiottoClass::createGiottoPolygon()](https://drieslab.github.io/GiottoClass/reference/createGiottoPolygon.html)
 - [x] [GiottoClass::calculateOverlap()](https://drieslab.github.io/GiottoClass/reference/calculateOverlap.html)
