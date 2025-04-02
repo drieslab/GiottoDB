@@ -17,7 +17,7 @@ setMethod(
     }
 
     .subset <- function(input, name, ids) {
-      if (is.null(ids) || is.null(name)) { # no subset
+      if (is.null(ids)) { # no subset
         return(input)
       }
 
@@ -43,8 +43,10 @@ setMethod(
 
     # intersect
     output_name <- paste0('intersect_',paste(sample(LETTERS, 9), collapse = ''))
+    g1_cols_keep <- x[] |> dplyr::select(!tidyselect::any_of("geom")) |> colnames()
     res <- dbSpatial::st_intersects(
       g1 = x,
+      g1_cols_keep = g1_cols_keep,
       g2 = y,
       name = output_name,
       ...
