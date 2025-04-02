@@ -55,47 +55,47 @@ setMethod(
 
     # 3. missing IDs repair
     if (!is.null(col_names) && !is.null(row_names)) {
-      # get all feature and cell information
-      unique_feats <- aggr_dtoverlap %>%
-        dplyr::distinct(feat_ID) %>%
-        dplyr::pull(feat_ID)
+      stop("Not yet implemented for dbSpatial objects")
 
-      missing_feats <- row_names[!row_names %in% unique_feats]
-
-      unique_cells <- aggr_dtoverlap %>%
-        dplyr::distinct(poly_ID) %>%
-        dplyr::pull(poly_ID)
-
-      missing_ids <- col_names[!col_names %in% unique_cells]
-
-      # create missing cell values, only if there are missing cell IDs!
-      if (!length(missing_ids) == 0) {
-        features_df <- data.frame(
-          row_num = seq_along(missing_ids),
-          value = missing_ids,
-          N = 0
-        )
-
-        aggr_dtoverlap[] <- aggr_dtoverlap[] |>
-          dplyr::mutate(row_num = dplyr::row_number()) |>
-          dplyr::left_join(features_df, by = "row_num", copy = TRUE) |>
-          dplyr::transmute(poly_ID, feat_ID = value, N = N) # FIXME: double check correct assignment and relabel to ijx colnames
-      }
-
-      if (!length(missing_feats) == 0) {
-        cell_df <- data.frame(
-          row_num = seq_along(missing_feats),
-          value = missing_feats,
-          N = 0
-        )
-
-        aggr_dtoverlap[] <- aggr_dtoverlap[] |>
-          dplyr::mutate(row_num = dplyr::row_number()) |>
-          dplyr::left_join(cell_df, by = "row_num", copy = TRUE) |>
-          dplyr::transmute(poly_ID = value, feat_ID, N = N) # FIXME: double check correct assignment and relabel to ijx colnames
-      }
-
-      # TODO: creating missing feature values
+      # # get all feature and cell information
+      # unique_feats <- aggr_dtoverlap %>%
+      #   dplyr::distinct(feat_ID) %>%
+      #   dplyr::pull(feat_ID)
+      #
+      # missing_feats <- row_names[!row_names %in% unique_feats]
+      #
+      # unique_cells <- aggr_dtoverlap %>%
+      #   dplyr::distinct(poly_ID) %>%
+      #   dplyr::pull(poly_ID)
+      #
+      # missing_ids <- col_names[!col_names %in% unique_cells]
+      #
+      # # create missing cell values, only if there are missing cell IDs!
+      # if (!length(missing_ids) == 0) {
+      #   features_df <- data.frame(
+      #     row_num = seq_along(missing_ids),
+      #     value = missing_ids,
+      #     N = 0
+      #   )
+      #
+      #   aggr_dtoverlap[] <- aggr_dtoverlap[] |>
+      #     dplyr::mutate(row_num = dplyr::row_number()) |>
+      #     dplyr::left_join(features_df, by = "row_num", copy = TRUE) |>
+      #     dplyr::transmute(poly_ID, feat_ID = value, N = N) # FIXME: double check correct assignment and relabel to ijx colnames
+      # }
+      #
+      # if (!length(missing_feats) == 0) {
+      #   cell_df <- data.frame(
+      #     row_num = seq_along(missing_feats),
+      #     value = missing_feats,
+      #     N = 0
+      #   )
+      #
+      #   aggr_dtoverlap[] <- aggr_dtoverlap[] |>
+      #     dplyr::mutate(row_num = dplyr::row_number()) |>
+      #     dplyr::left_join(cell_df, by = "row_num", copy = TRUE) |>
+      #     dplyr::transmute(poly_ID = value, feat_ID, N = N) # FIXME: double check correct assignment and relabel to ijx colnames
+      # }
     } else {
       if (isTRUE(verbose) && output == "MATRIX") {
         warning(GiottoUtils::wrap_txt(
@@ -114,8 +114,7 @@ setMethod(
              return(aggr_dtoverlap)
            },
            "DATA.TABLE" = {
-             #TODO: throw warning before casting for possible memory failure
-             #TODO: cast to data.table
+             stop("Not yet implemented for dbSpatial objects")
            },
            "MATRIX" = {
              #TODO: throw warning before casting for possible memory failure
